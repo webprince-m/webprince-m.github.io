@@ -30,10 +30,10 @@
   const enableFancyCursor = hasFinePointer && !prefersReducedMotion;
 
   const typedPhrases = [
-    "healthcare systems & LIMS platforms.",
-    "FHIR & HL7 EHR integrations.",
     "scaling products that millions use.",
     "cloud-native systems on AWS.",
+    "healthcare systems & LIMS platforms.",
+    "cross-platform mobile with React Native.",
   ];
 
   let mouseX = window.innerWidth / 2;
