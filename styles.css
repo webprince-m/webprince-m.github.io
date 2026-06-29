@@ -1353,6 +1353,264 @@ textarea:focus-visible {
   color: var(--accent);
 }
 
+/* Healthcare spotlight */
+.healthcare-spotlight {
+  padding: 2rem 0 3rem;
+}
+
+.healthcare-spotlight-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 2.5rem;
+  border-radius: calc(var(--radius) + 4px);
+  background: linear-gradient(145deg, var(--surface), var(--accent-dim));
+  border: 1px solid var(--accent-border-soft);
+  box-shadow: var(--shadow), 0 0 0 1px var(--accent-border-faint);
+  overflow: hidden;
+  position: relative;
+  animation: healthcare-glow 4s ease-in-out infinite;
+}
+
+@keyframes healthcare-glow {
+  0%, 100% { box-shadow: var(--shadow), 0 0 24px var(--accent-dim); }
+  50% { box-shadow: var(--shadow), 0 0 40px var(--accent-glow); }
+}
+
+.healthcare-spotlight-inner::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  filter: blur(80px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.healthcare-spotlight-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.healthcare-spotlight-copy h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 0.5rem 0 1rem;
+  max-width: 22ch;
+}
+
+.healthcare-spotlight-copy p {
+  color: var(--text-muted);
+  max-width: 46ch;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow--healthcare {
+  background: var(--accent-surface-strong, var(--accent-dim));
+  border-color: var(--accent-border-soft);
+}
+
+.healthcare-capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.healthcare-capability {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--float-card-bg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.healthcare-capability:hover {
+  border-color: var(--accent-border-soft);
+  transform: translateY(-3px);
+}
+
+.healthcare-capability-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.healthcare-capability-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.healthcare-capability strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+}
+
+.healthcare-capability span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.text-accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.status-badge--healthcare {
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-color: var(--accent-border-soft);
+}
+
+.stat-card--healthcare {
+  border-color: var(--accent-border-soft);
+  background: linear-gradient(160deg, var(--float-card-bg), var(--accent-dim));
+}
+
+.stat-card--healthcare dt {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.pill--healthcare {
+  background: var(--accent-surface-strong, var(--accent-dim));
+  color: var(--accent);
+  border: 1px solid var(--accent-border-faint);
+}
+
+.skill-card--healthcare {
+  background: linear-gradient(160deg, var(--surface), var(--accent-dim));
+  border-color: var(--accent-border-soft);
+}
+
+.skill-card--healthcare::before {
+  opacity: 1;
+}
+
+.skill-badge {
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border-faint);
+}
+
+.timeline-item--healthcare {
+  background: linear-gradient(145deg, var(--surface), var(--accent-dim));
+  border-color: var(--accent-border-soft);
+}
+
+.timeline-item--healthcare .timeline-marker {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.timeline-tag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.timeline-tag--healthcare {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--accent-border-faint);
+}
+
+.project-card--healthcare {
+  background: linear-gradient(160deg, var(--surface), var(--accent-dim));
+  border-color: var(--accent-border-soft);
+}
+
+.project-icon--healthcare {
+  background: var(--accent-surface-strong, var(--accent-dim));
+  border-color: var(--accent-border-soft);
+  color: var(--accent);
+}
+
+.project-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 2;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: var(--gradient-text);
+}
+
+.expertise-tags--lead {
+  background: var(--gradient-text) !important;
+  color: var(--on-accent) !important;
+  border-color: transparent !important;
+  font-weight: 700;
+}
+
+.expertise-tags--accent {
+  color: var(--accent) !important;
+  background: var(--accent-dim) !important;
+  border-color: var(--accent-border-soft) !important;
+  font-weight: 600;
+}
+
+:root,
+[data-theme="dark"] {
+  --accent-surface-strong: rgba(109, 184, 150, 0.2);
+}
+
+[data-theme="light"] {
+  --accent-surface-strong: rgba(47, 111, 82, 0.16);
+}
+
+@media (max-width: 960px) {
+  .healthcare-spotlight-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .healthcare-capabilities {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Glow cards with animated border */
 .glow-card {
   position: relative;
@@ -2285,6 +2543,10 @@ textarea:focus-visible {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .healthcare-spotlight-inner {
+    animation: none;
   }
 
   .btn:hover,
