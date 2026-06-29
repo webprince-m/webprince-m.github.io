@@ -7,7 +7,7 @@
   <title>Mark Clark — Senior Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script>
     (function () {
@@ -15,9 +15,7 @@
       var theme =
         stored === "light" || stored === "dark"
           ? stored
-          : window.matchMedia("(prefers-color-scheme: light)").matches
-            ? "light"
-            : "dark";
+          : "light";
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
@@ -171,15 +169,14 @@
       </div>
     </section>
 
-    <section class="trust-bar" aria-label="Companies and institutions">
+    <section class="trust-bar" aria-label="Companies">
       <div class="container trust-bar-inner reveal">
-        <p class="trust-label">Trusted experience at</p>
+        <p class="trust-label">Experience at</p>
         <ul class="trust-logos">
-          <li><span class="trust-logo">Nike</span></li>
+          <li><span class="trust-logo trust-logo--accent">Nike</span></li>
           <li><span class="trust-logo">Slack</span></li>
           <li><span class="trust-logo">PayPal</span></li>
           <li><span class="trust-logo">Explo</span></li>
-          <li><span class="trust-logo trust-logo--accent">UC Berkeley</span></li>
         </ul>
       </div>
     </section>
@@ -188,9 +185,9 @@
       <div class="marquee marquee--reverse">
         <div class="marquee-track">
           <span class="marquee-highlight">Nike</span><span>Slack</span><span>PayPal</span><span>Explo</span>
-          <span class="marquee-highlight">UC Berkeley</span><span>React</span><span>AWS</span><span>Kubernetes</span>
+          <span class="marquee-highlight">Docker</span><span>React</span><span>AWS</span><span>Kubernetes</span>
           <span>Nike</span><span>Slack</span><span>PayPal</span><span>Explo</span>
-          <span class="marquee-highlight">UC Berkeley</span><span>React</span><span>AWS</span><span>Kubernetes</span>
+          <span class="marquee-highlight">Docker</span><span>React</span><span>AWS</span><span>Kubernetes</span>
         </div>
       </div>
       <div class="marquee">
