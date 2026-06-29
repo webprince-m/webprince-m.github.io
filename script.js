@@ -371,6 +371,10 @@
       let width = 0;
       let height = 0;
       let animationId = 0;
+      const connectRadius = 150;
+      const collectRadius = 72;
+      const linkRadius = 48;
+      const minCursorDist = 14;
 
       function resize() {
         width = canvas.width = window.innerWidth;
@@ -378,16 +382,17 @@
       }
 
       function createParticles() {
-        const count = Math.min(100, Math.floor((width * height) / 14000));
+        const count = Math.min(280, Math.max(120, Math.floor((width * height) / 4500)));
         particles = [];
 
         for (let i = 0; i < count; i++) {
           particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            r: Math.random() * 2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            r: Math.random() * 2.2 + 0.6,
+            baseR: Math.random() * 2.2 + 0.6,
           });
         }
       }
@@ -395,22 +400,42 @@
       function draw() {
         ctx.clearRect(0, 0, width, height);
         const isDark = document.documentElement.getAttribute("data-theme") !== "light";
-        const dotColor = isDark ? "rgba(56, 189, 248, 0.55)" : "rgba(2, 132, 199, 0.4)";
-        const lineColor = isDark ? "rgba(167, 139, 250, 0.1)" : "rgba(124, 58, 237, 0.08)";
+        const dotColor = isDark ? "rgba(109, 184, 150, 0.55)" : "rgba(47, 111, 82, 0.42)";
+        const dotBright = isDark ? "rgba(143, 212, 176, 0.8)" : "rgba(82, 168, 122, 0.7)";
+        const lineColor = isDark ? "rgba(143, 212, 176, 0.12)" : "rgba(82, 168, 122, 0.1)";
+        const cursorLine = isDark ? "rgba(109, 184, 150, 0.28)" : "rgba(47, 111, 82, 0.22)";
 
         particles.forEach(function (p, i) {
+          let inCollectZone = false;
+          let inLinkZone = false;
+
           if (hasFinePointer) {
             const dx = mouseX - p.x;
             const dy = mouseY - p.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 140) {
-              p.vx += (dx / dist) * 0.02;
-              p.vy += (dy / dist) * 0.02;
+
+            if (dist > 0 && dist < collectRadius) {
+              inCollectZone = true;
+              inLinkZone = dist < linkRadius;
+
+              if (dist > minCursorDist) {
+                const pull = (1 - dist / collectRadius) * 0.028;
+                p.vx += (dx / dist) * pull;
+                p.vy += (dy / dist) * pull;
+                p.r = p.baseR + (1 - dist / collectRadius) * 1.2;
+              } else {
+                const push = 0.018;
+                p.vx -= (dx / dist) * push;
+                p.vy -= (dy / dist) * push;
+                p.r = p.baseR + 0.8;
+              }
+            } else {
+              p.r += (p.baseR - p.r) * 0.1;
             }
           }
 
-          p.vx *= 0.99;
-          p.vy *= 0.99;
+          p.vx *= 0.988;
+          p.vy *= 0.988;
           p.x += p.vx;
           p.y += p.vy;
 
@@ -419,9 +444,21 @@
           if (p.y < 0) p.y = height;
           if (p.y > height) p.y = 0;
 
+          if (inLinkZone) {
+            const mdx = mouseX - p.x;
+            const mdy = mouseY - p.y;
+            const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouseX, mouseY);
+            ctx.strokeStyle = cursorLine;
+            ctx.lineWidth = (1 - mdist / linkRadius) * 0.9;
+            ctx.stroke();
+          }
+
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = dotColor;
+          ctx.fillStyle = inCollectZone ? dotBright : dotColor;
           ctx.fill();
 
           for (let j = i + 1; j < particles.length; j++) {
@@ -430,12 +467,12 @@
             const pdy = p.y - q.y;
             const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
 
-            if (pdist < 130) {
+            if (pdist < connectRadius) {
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
               ctx.strokeStyle = lineColor;
-              ctx.lineWidth = 1 - pdist / 130;
+              ctx.lineWidth = (1 - pdist / connectRadius) * 0.9;
               ctx.stroke();
             }
           }
